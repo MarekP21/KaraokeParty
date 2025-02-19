@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users>
+    <user>
+        <email>adminmarek@gmail.com</email>
+        <login>MarekAdmin</login>
+        <password>9ce8fb2e1640f7de440acc8e8e26af6df3ac387b0114deb8d153e75a24a18425</password>
+        <phoneNumber>444 545 324</phoneNumber>
+        <role>moderator</role>
+        <salt>928974e04bffb80245649f9363aa2d37</salt>
+    </user>
+    <user>
+        <email></email>
+        <login>MarekNormal</login>
+        <password>41c13c0c5a6eb5f9c5b2e1761adcca68192bd0d963db3a13a0890fbbe99c3d8f</password>
+        <phoneNumber>231 234 322</phoneNumber>
+        <salt>b4b754d9e7bb3803ab527a52067d2e08</salt>
+    </user>
+    <user>
+        <email>paweladmin@onet.pl</email>
+        <login>PawelAdmin</login>
+        <password>ebd5f98f2b3a44ef0d3a18b616b8f516b7aad6d98e98b2cb67427bd8b8185927</password>
+        <phoneNumber>343 333 222</phoneNumber>
+        <role>moderator</role>
+        <salt>a394a0d68d40a8b1c968f4289e196209</salt>
+    </user>
+    <user>
+        <email>newuser@gmail.com</email>
+        <login>NewUser</login>
+        <password>c0706cbee83a2c9e26c532796640d1480a85a011709418595f09db9a65086984</password>
+        <phoneNumber>111 222 333</phoneNumber>
+        <salt>60c6ed451280e4e60b1c1e60f7552436</salt>
+    </user>
+</users>

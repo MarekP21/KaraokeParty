@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Queue</title>
+    <link rel="stylesheet" th:href="@{/css/song.css}" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container py-5 mt-5">
+    <div class="table-container">
+        <div class="header-container mb-4">
+            <h1>Song Queue</h1>
+            <div th:if="${canAdd}">
+                <!-- Formularz dodawania piosenki -->
+                <form th:action="@{/karaoke/}" method="post" class="d-flex align-items-center">
+                    <div class="form-group mr-3">
+                        <label for="song" class="mr-2">Select a Song:</label>
+                        <select id="song" name="songId" class="form-control" required>
+                            <option value="" disabled selected>Select a song</option>
+                            <option th:each="song : ${songs}" th:value="${song.id}" th:text="${song.produced_by} + ' – ' + ${song.name}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-purple btn-lg px-5 rounded">Add to Queue</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Informacja dla użytkownika -->
+        <div class="alert alert-warning mt-4" role="alert" th:if="${!canAdd}">
+            You have already added a song to the queue.
+        </div>
+
+        <!-- Tabela kolejki -->
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Song Name</th>
+                <th>Added By</th>
+                <th th:if="${isModerator}">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Jeśli kolejka jest pusta, wyświetlamy komunikat -->
+            <tr th:if="${#lists.isEmpty(queue)}">
+                <td colspan="4" class="text-center alert alert-info">No songs in the queue</td>
+            </tr>
+
+            <!-- Wyświetlanie piosenek w kolejce -->
+            <tr th:each="item : ${queue}">
+                <!-- Numer pozycji -->
+                <td>
+                    <span th:if="${!isModerator}" th:text="${item.position}"></span>
+                    <form th:if="${isModerator}" th:action="@{/karaoke/update/position}" method="post" class="d-inline">
+                        <input type="hidden" name="currentPosition" th:value="${item.position}"/>
+                        <input type="number" name="newPosition" class="form-control d-inline" style="width: 60px;" min="1" th:max="${#lists.size(queue)}" th:value="${item.position}" required />
+                        <button type="submit" class="btn btn-warning btn-sm">Update</button>
+                    </form>
+                </td>
+                <!-- Nazwa piosenki -->
+                <td>
+                    <a th:href="@{'/song/' + ${item.songId}}" th:text="${item.songName}"></a>
+                    <form th:if="${isModerator}" th:action="@{/karaoke/update/song}" method="post" class="d-inline">
+                        <input type="hidden" name="position" th:value="${item.position}" />
+                        <select name="songId" class="form-control d-inline" style="width: auto;" required>
+                            <option value="" disabled selected>Select a song</option>
+                            <option th:each="song : ${songs}" th:value="${song.id}" th:selected="${song.id == item.songId}" th:text="${song.produced_by} + ' – ' + ${song.name}"></option>
+                        </select>
+                        <button type="submit" class="btn btn-warning btn-sm">Update</button>
+                    </form>
+                </td>
+                <!-- Dodane przez -->
+                <td th:text="${item.addedBy}"></td>
+                <!-- Akcje: usunięcie (dla moderatora) -->
+                <td th:if="${isModerator}">
+                    <form th:action="@{/karaoke/delete/{position}(position=${item.position})}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

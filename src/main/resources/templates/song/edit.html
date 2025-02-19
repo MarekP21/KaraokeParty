@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Song</title>
+    <link rel="stylesheet" th:href="@{/css/song.css}" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container py-5 mt-5">
+    <div class="form-container">
+        <h1 class="text-center text-purple">Edit Song</h1>
+        <form th:action="@{'/song/edit/' + ${song.id}}" th:object="${song}" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" class="form-control rounded" th:field="*{name}" placeholder="Enter song name" />
+                <span class="error" th:if="${nameError}" th:text="${nameError.defaultMessage}"></span>
+            </div>
+            <div class="form-group">
+                <label for="produced_by">Produced By:</label>
+                <input type="text" id="produced_by" class="form-control rounded" th:field="*{produced_by}" placeholder="Enter producer's name"/>
+                <span class="error" th:if="${produced_byError}" th:text="${produced_byError.defaultMessage}"></span>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre:</label>
+                <select id="genre" class="form-control rounded" th:field="*{genre}" multiple>
+                    <option th:each="option : ${availableGenres}"
+                            th:value="${option}"
+                            th:text="${option}">
+                    </option>
+                </select>
+                <small class="form-text text-muted">Hold Ctrl (or Cmd on Mac) to select multiple genres.</small>
+                <span class="error" th:if="${genreError}" th:text="${genreError.defaultMessage}"></span>
+            </div>
+            <div class="form-group">
+                <label>Origin:</label>
+                <div>
+                    <label><input type="radio" name="origin" th:field="*{origin}" value="Poland"/> Poland </label>
+                    <label><input type="radio" name="origin" th:field="*{origin}" value="USA"/> USA </label>
+                    <label><input type="radio" name="origin" th:field="*{origin}" value="Other"/> Other </label>
+                </div>
+                <span class="error" th:if="${originError}" th:text="${originError.defaultMessage}"></span>
+            </div>
+            <div class="form-group">
+                <label for="lyrics">Lyrics:</label>
+                <textarea id="lyrics" class="form-control rounded" th:field="*{lyrics}" placeholder="Enter lyrics (optional)" style="resize: vertical;"></textarea>
+                <span class="error" th:if="${lyricsError}" th:text="${lyricsError.defaultMessage}"></span>
+            </div>
+            <div class="form-group">
+                <label for="length">Length (seconds):</label>
+                <input type="number" id="length" class="form-control rounded" th:field="*{length}" placeholder="Enter song length in seconds"/>
+                <span class="error" th:if="${lengthError}" th:text="${lengthError.defaultMessage}"></span>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-purple btn-lg rounded px-5">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:replace="fragments/footer:: footer"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

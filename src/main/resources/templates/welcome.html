@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karaoke Party - Welcome!</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/loginStyle.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container py-5 mt-5">
+    <div class="card">
+        <!-- Logo karaoke -->
+        <img th:src="@{/images/karaoke-logo.png}" alt="Karaoke Logo" class="logo img-fluid mx-auto d-block mb-4">
+
+        <!-- Powitalny nagłówek -->
+        <h1 th:if="${loggedInUser != null}" th:text="${message}" class="funnel-display-regular text-center"></h1>
+        <p class="text-center funnel-display-bold mt-3 mb-4">Get ready to shine! Your karaoke stage awaits 🎤</p>
+
+        <!-- Przyciski akcji -->
+        <div class="d-flex justify-content-center gap-3">
+            <!-- Przycisk: Rozpocznij zabawę -->
+            <a th:href="@{/karaoke/}" class="btn btn-purple btn-lg mr-3">
+                🎶 Start Singing
+            </a>
+            <!-- Przycisk: Wyloguj się -->
+            <form th:action="@{/logout}" method="get">
+                <button type="submit" class="btn back-btn btn-lg">
+                    Logout
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer:: footer"></div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song List</title>
+    <link rel="stylesheet" th:href="@{/css/song.css}" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container py-5 mt-5">
+    <div class="table-container">
+        <div class="header-container mb-4">
+            <h1>Song List</h1>
+            <div th:if="${isModerator}">
+                <a th:href="@{/song/add}" class="btn btn-purple btn-lg px-5 rounded">Add New Song</a>
+            </div>
+        </div>
+
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>🔻Name</th>
+                <th>👤User Login</th>
+                <th>📝 Produced By</th>
+                <th>🎵Genre</th>
+                <th>⌚ Length (seconds)</th>
+                <th th:if="${isModerator}">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="song : ${songs}">
+                <td>
+                    <a th:href="@{'/song/' + ${song.id}}" th:text="${song.name}"></a>
+                </td>
+                <td th:text="${song.userLogin}"></td>
+                <td th:text="${song.produced_by}"></td>
+                <td><span th:each="genre, iterStat : ${song.genre}"><span th:text="${genre}"/><span th:if="${iterStat.index != song.genre.size() - 1}" th:text="', '"/></span></td>
+                <td th:text="${song.length}"></td>
+                <td th:if="${isModerator}">
+                    <div>
+                        <a th:href="@{'/song/edit/' + ${song.id}}" class="btn btn-warning btn-sm">Edit</a>
+                        <a th:href="@{'/song/delete/' + ${song.id}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this song?')">Delete</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div th:replace="fragments/footer:: footer"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

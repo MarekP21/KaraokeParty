@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration</title>
+    <link rel="stylesheet" th:href="@{/css/loginStyle.css}" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container py-5 mt-5">
+    <div class="card">
+        <h1>User Registration</h1>
+        <form action="#" th:action="@{/register}" th:object="${user}" method="post">
+            <div class="form-group">
+                <label for="login">Login:</label>
+                <input type="text" id="login" th:field="*{login}" class="form-control"/>
+                <span class="error" th:if="${loginError}" th:text="${loginError.defaultMessage}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" th:field="*{password}" class="form-control"/>
+                <span class="error" th:if="${passwordError}" th:text="${passwordError.defaultMessage}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control"/>
+                <span class="error" th:if="${phoneNumberError}" th:text="${phoneNumberError.defaultMessage}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" th:field="*{email}" class="form-control"/>
+                <span class="error" th:if="${emailError}" th:text="${emailError.defaultMessage}"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-purple">Register</button>
+                <button type="button" class="btn back-btn" onclick="window.location.href='/login'">Go to Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:replace="fragments/footer:: footer"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

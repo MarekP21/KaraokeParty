@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/loginStyle.css}" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container py-5 mt-5">
+    <div class="card">
+        <h1>Login to your account</h1>
+        <p th:if="${message != null}"
+           th:class="${messageType == 'error' ? 'alert alert-danger' : (messageType == 'success' ? 'alert alert-success' : '')}"
+           th:text="${message}">
+        </p>
+
+        <form th:action="@{/login}" th:object="${user}" method="post">
+            <div class="form-group">
+                <label for="login">Login:</label>
+                <input type="text" id="login" th:field="*{login}" class="form-control"/>
+                <span class="error" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" th:field="*{password}" class="form-control"/>
+                <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-purple">Login</button>
+                <button type="button" class="btn back-btn" onclick="window.location.href='/register'">Back to Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:replace="fragments/footer:: footer"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

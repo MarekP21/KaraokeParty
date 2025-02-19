@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Details</title>
+    <link rel="stylesheet" th:href="@{/css/song.css}" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container py-5 mt-5">
+    <div class="form-container">
+        <h1 class="text-center text-purple">Song Details</h1>
+
+        <!-- Display song details -->
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" class="form-control rounded" th:value="${song.name}" disabled />
+        </div>
+        <div class="form-group">
+            <label for="produced_by">Produced By:</label>
+            <input type="text" id="produced_by" class="form-control rounded" th:value="${song.produced_by}" disabled />
+        </div>
+        <div class="form-group">
+            <label for="genre">Genre:</label>
+            <input type="text" id="genre" class="form-control rounded" th:value="${genres}" disabled />
+        </div>
+        <div class="form-group">
+            <label for="origin">Origin:</label>
+            <input type="text" id="origin" class="form-control rounded" th:value="*{song.origin}" disabled/>
+        </div>
+        <div class="form-group">
+            <label for="lyrics">Lyrics:</label>
+            <textarea id="lyrics" class="form-control rounded" th:text="*{song.lyrics}" style="resize: vertical;" disabled></textarea>
+        </div>
+        <div class="form-group">
+            <label for="length">Length (seconds):</label>
+            <input type="number" id="length" class="form-control rounded" th:value="${song.length}" disabled />
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:replace="fragments/footer:: footer"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

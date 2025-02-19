@@ -1,0 +1,83 @@
+body {
+    background-color: #f8f9fa !important;
+}
+
+.container {
+    max-width: 500px !important;
+}
+
+.card {
+    background-color: #fff !important;
+    padding: 30px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+h1 {
+    text-align: center !important;
+    color: #6f42c1 !important;
+
+    font-family: "Funnel Display", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.form-group label {
+    font-weight: bold !important;
+}
+
+.form-actions {
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+.form-actions button {
+    width: 48% !important;
+}
+
+.error {
+    color: red !important;
+    font-size: 0.875rem !important;
+}
+
+.btn-purple {
+    background-color: #6f42c1 !important;
+    color: white !important;
+    width: 100% !important;
+}
+
+.btn-purple:hover {
+    background-color: #5a32a3 !important;
+}
+
+.back-btn {
+    background-color: #f1f1f1 !important;
+    color: #6f42c1 !important;
+    border: 1px solid #6f42c1 !important;
+}
+
+.back-btn:hover {
+    background-color: #6f42c1 !important;
+    color: white !important;
+}
+
+.funnel-display-regular {
+    font-family: "Funnel Display", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.funnel-display-bold {
+    font-family: "Funnel Display", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+}
+
+.logo {
+    border-radius: 15px; /* Zaokrąglenie rogów */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Cień wokół logo */
+    max-width: 125px; /* Zmniejszenie rozmiaru logo */
+}
